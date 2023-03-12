@@ -1,17 +1,26 @@
-﻿using Code.Views;
+﻿using System;
+using System.Threading;
+using Code.Views;
 using Cysharp.Threading.Tasks;
 using UnityEngine.SceneManagement;
 
 namespace Code.infrastructure.Services.LoadScene
 {
-    public class LoadSceneService : ILoadScene
+    public class LoadSceneService : ILoadScene, IDisposable
     {
         private readonly ICurtain _curtain;
+        private readonly CancellationTokenSource _cancellationToken = new CancellationTokenSource();
 
         private bool _firstLoadIsEnded;
 
         public LoadSceneService(ICurtain curtain) =>
             _curtain = curtain;
+
+        public void Dispose()
+        {
+            _cancellationToken.Cancel();
+            _cancellationToken.Dispose();
+        }
 
         public async UniTask CurtainOnAsync() =>
             await _curtain.FadeOn();
@@ -27,7 +36,7 @@ namespace Code.infrastructure.Services.LoadScene
             var load = SceneManager.LoadSceneAsync(sceneName);
 
             while (!load.isDone)
-                await UniTask.Yield();
+                await UniTask.Yield(cancellationToken: _cancellationToken.Token);
         }
     }
 }

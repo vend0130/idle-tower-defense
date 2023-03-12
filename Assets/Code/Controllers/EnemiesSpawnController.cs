@@ -4,12 +4,10 @@
     {
         public void StartSpawn()
         {
-            
         }
 
         public void EndSpawn()
         {
-            
         }
     }
 }
