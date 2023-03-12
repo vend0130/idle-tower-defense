@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Code.Extensions;
+using UnityEngine;
 
-namespace Code.Game
+namespace Code.Game.Hero
 {
     public class HeroRotation : MonoBehaviour
     {
@@ -19,7 +20,7 @@ namespace Code.Game
             if (_target == null)
                 return;
 
-            _body.rotation = Quaternion.LookRotation(transform.forward, _target.transform.position);
+            _body.LookAt2D(_target);
         }
     }
 }

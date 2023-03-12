@@ -33,7 +33,7 @@ namespace Code.Controllers
 
         private void Spawn()
         {
-            _enemiesFactory.CreateEnemy(EnemyType.Simply, new Vector2(0, 15));
+            _enemiesFactory.CreateEnemy(EnemyType.Simply, new Vector2(0, 5));
             Delay().Forget();
         }
 

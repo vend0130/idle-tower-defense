@@ -12,7 +12,7 @@ namespace Code.Factories.Enemies
             _assetsProvider = assetsProvider;
 
         public void CreateEnemy(EnemyType enemyType, Vector2 at) =>
-            _assetsProvider.Instantiate(GetPath(enemyType), at);
+            _assetsProvider.DiInstantiate(GetPath(enemyType), at);
 
         private string GetPath(EnemyType enemyType)
         {
