@@ -2,7 +2,7 @@
 {
     public enum EnemyType
     {
-        Simply,
-        Boss
+        Simply = 0,
+        Boss = 1
     }
 }

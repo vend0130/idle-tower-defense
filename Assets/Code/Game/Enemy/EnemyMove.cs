@@ -10,7 +10,7 @@ namespace Code.Game.Enemy
         [SerializeField] private Transform _current;
         [SerializeField] private float _speed = 1f;
         [SerializeField] private float _minimalDistanceToHero = .75f;
-        
+
         private Transform _target;
 
         [Inject]
@@ -23,7 +23,7 @@ namespace Code.Game.Enemy
         {
             if (_target == null)
                 return;
-            
+
             Move();
             Rotation();
         }
@@ -31,20 +31,18 @@ namespace Code.Game.Enemy
         private void Move()
         {
             float distance = Vector2.Distance(_current.position, _target.position);
-            
-            if(HeroNotReached(distance))
+
+            if (HeroNotReached(distance))
                 return;
-            
+
             float moveTime = _speed / distance * Time.deltaTime;
             _current.position = Vector2.Lerp(_current.position, _target.position, moveTime);
         }
 
-        private bool HeroNotReached(float distance) => 
+        private bool HeroNotReached(float distance) =>
             distance <= _minimalDistanceToHero;
 
-        private void Rotation()
-        {
+        private void Rotation() =>
             _current.LookAt2D(_target);
-        }
     }
 }

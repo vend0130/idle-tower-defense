@@ -18,7 +18,7 @@ namespace Code.Factories
 
         public void CreateHero()
         {
-            var hero =_assetsProvider.DiInstantiate(AssetPath.HeroPath, Vector2.zero);
+            var hero = _assetsProvider.DiInstantiate(AssetPath.HeroPath, Vector2.zero);
             _diContainer.Bind<HeroRotation>().FromInstance(hero.GetComponent<HeroRotation>());
         }
     }

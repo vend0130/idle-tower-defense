@@ -110,6 +110,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8905804857038030544, guid: 40b65c55404eecd4790e94f221053f70, type: 3}
+      propertyPath: _speed
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2261632231247670150, guid: 40b65c55404eecd4790e94f221053f70, type: 3}
       propertyPath: m_Name
       value: BossEnemy
