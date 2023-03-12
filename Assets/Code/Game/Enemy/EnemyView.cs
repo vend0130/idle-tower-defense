@@ -7,6 +7,7 @@ namespace Code.Game.Enemy
     public class EnemyView : MonoBehaviour
     {
         [SerializeField] private EnemyMove _move;
+        [SerializeField] private EnemyAttack _attack;
         [SerializeField] private Transform _current;
         [SerializeField] private float _minimalDistanceToHero = .75f;
 
@@ -27,9 +28,14 @@ namespace Code.Game.Enemy
             float distance = Vector2.Distance(_current.position, _target.position);
 
             if (HeroNotReached(distance))
+            {
                 _move.StopMove();
+                _attack.Attack();
+            }
             else
+            {
                 _move.Move(_current, distance, _target.position);
+            }
 
             _move.Rotation(_current, _target.position);
         }

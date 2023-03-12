@@ -6,16 +6,16 @@ namespace Code.Game.Enemy
     {
         [SerializeField] private Animator _animator;
 
-        private readonly int _moveHas = Animator.StringToHash("Move");
+        private readonly int _moveHash = Animator.StringToHash("Move");
+        private readonly int _attackHash = Animator.StringToHash("Attack");
 
         public void StarMove() =>
-            _animator.SetBool(_moveHas, true);
+            _animator.SetBool(_moveHash, true);
 
         public void StopMove() =>
-            _animator.SetBool(_moveHas, false);
+            _animator.SetBool(_moveHash, false);
 
-        public void Attack()
-        {
-        }
+        public void Attack() =>
+            _animator.SetTrigger(_attackHash);
     }
 }

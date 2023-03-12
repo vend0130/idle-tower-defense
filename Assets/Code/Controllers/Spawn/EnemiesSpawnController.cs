@@ -44,7 +44,7 @@ namespace Code.Controllers.Spawn
         private void Spawn()
         {
             _enemiesFactory.CreateEnemy(EnemyType.Simply, GetSpawnPoint());
-            Delay().Forget();
+            // Delay().Forget();
         }
 
         private void DisposeToken()
