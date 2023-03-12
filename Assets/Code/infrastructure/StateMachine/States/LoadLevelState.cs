@@ -9,9 +9,13 @@ namespace Code.infrastructure.StateMachine.States
         private readonly ILoadScene _loadScene;
 
         private IGameFactory _gameFactory;
+        private IStateMachine _stateMachine;
 
         public LoadLevelState(ILoadScene loadScene) =>
             _loadScene = loadScene;
+
+        public void InitGameStateMachine(IStateMachine stateMachine) =>
+            _stateMachine = stateMachine;
 
         public void InitGameFactory(IGameFactory gameFactory) =>
             _gameFactory = gameFactory;
@@ -23,6 +27,7 @@ namespace Code.infrastructure.StateMachine.States
             await UniTask.WaitWhile(() => _gameFactory == null);
             await CreateWorld();
             await _loadScene.CurtainOffAsync();
+            _stateMachine.Enter<GameLoopState>();
         }
 
         public void Exit()

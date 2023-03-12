@@ -1,6 +1,15 @@
 ﻿namespace Code.Controllers
 {
-    public class EnemiesSpawnController
+    public class EnemiesSpawnController : ISpawnController
     {
+        public void StartSpawn()
+        {
+            
+        }
+
+        public void EndSpawn()
+        {
+            
+        }
     }
 }
