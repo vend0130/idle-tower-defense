@@ -9,11 +9,18 @@ namespace Code.infrastructure.Root.Boot
         private const string LevelSceneName = "Level";
 
         private readonly IStateMachine _stateMachine;
+        private readonly LoadLevelState _loadLevelState;
 
-        public BootInitialize(IStateMachine stateMachine) =>
+        public BootInitialize(IStateMachine stateMachine, LoadLevelState loadLevelState)
+        {
             _stateMachine = stateMachine;
+            _loadLevelState = loadLevelState;
+        }
 
-        public void Initialize() =>
+        public void Initialize()
+        {
+            _loadLevelState.InitGameStateMachine(_stateMachine);
             _stateMachine.Enter<LoadLevelState, string>(LevelSceneName);
+        }
     }
 }

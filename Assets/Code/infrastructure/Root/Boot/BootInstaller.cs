@@ -23,6 +23,7 @@ namespace Code.infrastructure.Root.Boot
         {
             Container.Bind<IStateMachine>().To<GameStateMachine>().AsSingle();
             Container.Bind<LoadLevelState>().AsSingle();
+            Container.Bind<GameLoopState>().AsSingle();
         }
 
         private void BindLoadScene()
