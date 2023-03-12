@@ -2,7 +2,7 @@
 using Code.infrastructure.StateMachine.States;
 using Zenject;
 
-namespace Code.infrastructure.Root
+namespace Code.infrastructure.Root.Boot
 {
     public class BootInitialize : IInitializable
     {

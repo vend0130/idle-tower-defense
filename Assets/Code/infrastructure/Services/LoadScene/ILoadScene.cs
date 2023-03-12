@@ -1,11 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 
 namespace Code.infrastructure.Services.LoadScene
 {
     public interface ILoadScene
     {
-        Task CurtainOnAsync();
-        Task LoadSceneAsync(string name);
-        Task CurtainOffAsync();
+        UniTask CurtainOnAsync();
+        UniTask LoadSceneAsync(string name);
+        UniTask CurtainOffAsync();
     }
 }

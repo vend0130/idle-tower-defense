@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using Code.infrastructure.Services.LoadScene.Curtain;
+﻿using Code.infrastructure.Services.LoadScene.Curtain;
+using Cysharp.Threading.Tasks;
 using UnityEngine.SceneManagement;
 
 namespace Code.infrastructure.Services.LoadScene
@@ -13,21 +13,21 @@ namespace Code.infrastructure.Services.LoadScene
         public LoadSceneService(ICurtain curtain) =>
             _curtain = curtain;
 
-        public async Task CurtainOnAsync() =>
+        public async UniTask CurtainOnAsync() =>
             await _curtain.FadeOn();
 
-        public async Task LoadSceneAsync(string name) =>
+        public async UniTask LoadSceneAsync(string name) =>
             await LoadScene(name);
 
-        public async Task CurtainOffAsync() =>
+        public async UniTask CurtainOffAsync() =>
             await _curtain.FadeOff();
 
-        private async Task LoadScene(string sceneName)
+        private async UniTask LoadScene(string sceneName)
         {
             var load = SceneManager.LoadSceneAsync(sceneName);
 
             while (!load.isDone)
-                await Task.Yield();
+                await UniTask.Yield();
         }
     }
 }

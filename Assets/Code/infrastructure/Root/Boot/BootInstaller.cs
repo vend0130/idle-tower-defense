@@ -5,7 +5,7 @@ using Code.infrastructure.StateMachine.States;
 using UnityEngine;
 using Zenject;
 
-namespace Code.infrastructure.Root
+namespace Code.infrastructure.Root.Boot
 {
     public class BootInstaller : MonoInstaller
     {
