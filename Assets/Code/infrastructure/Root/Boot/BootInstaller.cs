@@ -1,7 +1,7 @@
 using Code.infrastructure.Services.LoadScene;
-using Code.infrastructure.Services.LoadScene.Curtain;
 using Code.infrastructure.StateMachine;
 using Code.infrastructure.StateMachine.States;
+using Code.Views;
 using UnityEngine;
 using Zenject;
 

@@ -1,4 +1,4 @@
-﻿using Code.infrastructure.Services.LoadScene.Curtain;
+﻿using Code.Views;
 using Cysharp.Threading.Tasks;
 using UnityEngine.SceneManagement;
 

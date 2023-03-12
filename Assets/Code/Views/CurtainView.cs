@@ -3,7 +3,7 @@ using Code.Extensions;
 using DG.Tweening;
 using UnityEngine;
 
-namespace Code.infrastructure.Services.LoadScene.Curtain
+namespace Code.Views
 {
     public class CurtainView : MonoBehaviour, ICurtain
     {

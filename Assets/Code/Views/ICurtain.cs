@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Code.infrastructure.Services.LoadScene.Curtain
+namespace Code.Views
 {
     public interface ICurtain
     {
