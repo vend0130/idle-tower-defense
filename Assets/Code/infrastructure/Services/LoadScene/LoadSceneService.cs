@@ -18,8 +18,8 @@ namespace Code.infrastructure.Services.LoadScene
 
         public void Dispose()
         {
-            _cancellationToken.Cancel();
-            _cancellationToken.Dispose();
+            _cancellationToken?.Cancel();
+            _cancellationToken?.Dispose();
         }
 
         public async UniTask CurtainOnAsync() =>

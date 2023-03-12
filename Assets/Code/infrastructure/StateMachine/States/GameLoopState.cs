@@ -4,15 +4,15 @@ namespace Code.infrastructure.StateMachine.States
 {
     public class GameLoopState : IDefaultState
     {
-        private readonly ISpawnController _spawnController;
+        private ISpawnController _spawnController;
 
-        public GameLoopState(ISpawnController spawnController) => 
+        public void InitSpawnController(ISpawnController spawnController) =>
             _spawnController = spawnController;
 
-        public void Enter() => 
+        public void Enter() =>
             _spawnController.StartSpawn();
 
-        public void Exit() => 
+        public void Exit() =>
             _spawnController.EndSpawn();
     }
 }

@@ -11,6 +11,6 @@ namespace Code.Factories
             _assetsProvider = assetsProvider;
 
         public void CreateHero() =>
-            _assetsProvider.Instantiate(AssetPath.HeroPath, Vector2.zero);
+            _assetsProvider.DiInstantiate(AssetPath.HeroPath, Vector2.zero);
     }
 }

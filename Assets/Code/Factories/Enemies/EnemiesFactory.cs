@@ -1,4 +1,5 @@
-﻿using Code.Factories.Assets;
+﻿using System;
+using Code.Factories.Assets;
 using UnityEngine;
 
 namespace Code.Factories.Enemies
@@ -10,8 +11,20 @@ namespace Code.Factories.Enemies
         public EnemiesFactory(IAssetsProvider assetsProvider) =>
             _assetsProvider = assetsProvider;
 
-        public void CreateEnemy(EnemyType enemyType, Vector2 at)
+        public void CreateEnemy(EnemyType enemyType, Vector2 at) =>
+            _assetsProvider.Instantiate(GetPath(enemyType), at);
+
+        private string GetPath(EnemyType enemyType)
         {
+            switch (enemyType)
+            {
+                case EnemyType.Simply:
+                    return AssetPath.SimplyEnemyPath;
+                case EnemyType.Boss:
+                    return AssetPath.BossEnemyPath;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(enemyType), enemyType, null);
+            }
         }
     }
 }
