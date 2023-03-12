@@ -1,48 +1,35 @@
 ﻿using Code.Extensions;
-using Code.Game.Hero;
 using UnityEngine;
-using Zenject;
 
 namespace Code.Game.Enemy
 {
     public class EnemyMove : MonoBehaviour
     {
-        [SerializeField] private Transform _current;
+        [SerializeField] private EnemyAnimator _animator;
         [SerializeField] private float _speed = 1f;
-        [SerializeField] private float _minimalDistanceToHero = .75f;
 
-        private Transform _target;
+        private bool _isMoving;
 
-        [Inject]
-        public void Constructor(HeroRotation hero)
+        public void StopMove()
         {
-            _target = hero.transform;
+            if (_isMoving)
+                _animator.StopMove();
+
+            _isMoving = false;
         }
 
-        private void Update()
+        public void Move(Transform current, float distance, Vector2 targetPoint)
         {
-            if (_target == null)
-                return;
-
-            Move();
-            Rotation();
-        }
-
-        private void Move()
-        {
-            float distance = Vector2.Distance(_current.position, _target.position);
-
-            if (HeroNotReached(distance))
-                return;
-
             float moveTime = _speed / distance * Time.deltaTime;
-            _current.position = Vector2.Lerp(_current.position, _target.position, moveTime);
+            current.position = Vector2.Lerp(current.position, targetPoint, moveTime);
+
+            if (!_isMoving)
+                _animator.StarMove();
+
+            _isMoving = true;
         }
 
-        private bool HeroNotReached(float distance) =>
-            distance <= _minimalDistanceToHero;
-
-        private void Rotation() =>
-            _current.LookAt2D(_target);
+        public void Rotation(Transform current, Vector2 targetPoint) =>
+            current.LookAt2D(targetPoint);
     }
 }

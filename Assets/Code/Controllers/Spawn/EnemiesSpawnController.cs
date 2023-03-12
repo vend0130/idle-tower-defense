@@ -6,7 +6,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Code.Controllers
+namespace Code.Controllers.Spawn
 {
     public class EnemiesSpawnController : ISpawnController, IDisposable
     {

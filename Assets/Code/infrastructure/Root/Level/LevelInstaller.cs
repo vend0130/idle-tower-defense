@@ -1,4 +1,4 @@
-﻿using Code.Controllers;
+﻿using Code.Controllers.Spawn;
 using Code.Factories;
 using Code.Factories.Assets;
 using Code.Factories.Enemies;
@@ -21,10 +21,8 @@ namespace Code.infrastructure.Root.Level
             Container.BindInterfacesTo<LevelInitialize>().AsSingle();
         }
 
-        private void BindCamera()
-        {
+        private void BindCamera() =>
             Container.Bind<Camera>().FromInstance(_camera).AsSingle();
-        }
 
         private void BindFactories()
         {

@@ -1,4 +1,4 @@
-﻿namespace Code.Controllers
+﻿namespace Code.Controllers.Spawn
 {
     public interface ISpawnController
     {

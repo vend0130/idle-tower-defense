@@ -20,7 +20,7 @@ namespace Code.Game.Hero
             if (_target == null)
                 return;
 
-            _body.LookAt2D(_target);
+            _body.LookAt2D(_target.position);
         }
     }
 }
