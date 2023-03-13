@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using Code.Extensions;
+﻿using Code.Extensions;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 
@@ -16,19 +16,24 @@ namespace Code.Views
 
         private Tween _tween;
 
-        public async Task FadeOn()
+        private void OnDestroy()
+        {
+            _tween.SimpleKill();
+        }
+
+        public async UniTask FadeOn()
         {
             gameObject.SetActive(true);
             await Fade(FadeOnValue, _durationOn);
         }
 
-        public async Task FadeOff()
+        public async UniTask FadeOff()
         {
             await Fade(FadeOffValue, _durationOff);
             gameObject.SetActive(false);
         }
 
-        private async Task Fade(float targetValue, float duration)
+        private async UniTask Fade(float targetValue, float duration)
         {
             _tween.SimpleKill();
             _tween = _canvasGroup.DOFade(targetValue, duration);

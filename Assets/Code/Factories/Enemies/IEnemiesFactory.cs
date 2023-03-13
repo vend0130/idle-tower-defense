@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using Code.Game.Enemy;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Code.Factories.Enemies
 {

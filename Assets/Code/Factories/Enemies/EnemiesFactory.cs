@@ -6,7 +6,6 @@ using Code.Factories.AssetsManagement;
 using Code.Game.Enemy;
 using UnityEngine;
 using Zenject;
-using Random = UnityEngine.Random;
 
 namespace Code.Factories.Enemies
 {
@@ -122,12 +121,10 @@ namespace Code.Factories.Enemies
             switch (enemyType)
             {
                 case EnemyType.Boss when _boss.Count > 0:
-                    enemyView = _boss[0];
-                    _boss.Remove(enemyView);
+                    enemyView = GetEnemy(_boss);
                     break;
                 case EnemyType.Simply when _simply.Count > 0:
-                    enemyView = _simply[0];
-                    _simply.Remove(enemyView);
+                    enemyView = GetEnemy(_simply);
                     break;
                 default:
                     GameObject enemy = _assetsProvider.DiInstantiate(GetPrefab(enemyType), at);
@@ -154,6 +151,8 @@ namespace Code.Factories.Enemies
                 case EnemyType.Boss:
                     _boss.Add(enemyView);
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
             if (_controlledEnemie != null && enemyView == _controlledEnemie)
@@ -162,6 +161,14 @@ namespace Code.Factories.Enemies
                 _enemiesOnScene.Remove(enemyView);
 
             enemyView.EnemyTransform.position = _defaultPosition;
+        }
+
+        private EnemyView GetEnemy(List<EnemyView> enemies)
+        {
+            EnemyView enemy = enemies[0];
+            enemies.Remove(enemy);
+
+            return enemy;
         }
 
         private void AddEnemy(EnemyView enemyView)

@@ -1,4 +1,6 @@
-﻿using Code.Controllers.Spells;
+﻿using System;
+using System.Threading;
+using Code.Controllers.Spells;
 using Code.Factories;
 using Code.Game.Hero;
 using Code.infrastructure.Services.LoadScene;
@@ -6,9 +8,10 @@ using Cysharp.Threading.Tasks;
 
 namespace Code.infrastructure.StateMachine.States
 {
-    public class LoadLevelState : IPayloadState<string>
+    public class LoadLevelState : IPayloadState<string>, IDisposable
     {
         private readonly ILoadScene _loadScene;
+        private readonly CancellationTokenSource _cancellationToken = new CancellationTokenSource();
 
         private IGameFactory _gameFactory;
         private IStateMachine _stateMachine;
@@ -19,6 +22,12 @@ namespace Code.infrastructure.StateMachine.States
 
         public LoadLevelState(ILoadScene loadScene) =>
             _loadScene = loadScene;
+
+        public void Dispose()
+        {
+            _cancellationToken.Cancel();
+            _cancellationToken.Dispose();
+        }
 
         public void InitGameStateMachine(IStateMachine stateMachine) =>
             _stateMachine = stateMachine;
@@ -54,7 +63,7 @@ namespace Code.infrastructure.StateMachine.States
             _meteoriteController.InitSpellView(_gameFactory.CreateSpell(SpellType.Meteorite));
             _controlOverEnemy.InitSpellView(_gameFactory.CreateSpell(SpellType.ControlOverEnemy));
             _lightningController.InitSpellView(_gameFactory.CreateSpell(SpellType.Lightning));
-            await UniTask.Yield();
+            await UniTask.Yield(cancellationToken: _cancellationToken.Token);
         }
     }
 }

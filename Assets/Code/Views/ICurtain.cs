@@ -1,10 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 
 namespace Code.Views
 {
     public interface ICurtain
     {
-        Task FadeOn();
-        Task FadeOff();
+        UniTask FadeOn();
+        UniTask FadeOff();
     }
 }

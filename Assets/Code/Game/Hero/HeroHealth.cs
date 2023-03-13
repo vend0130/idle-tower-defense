@@ -27,7 +27,7 @@ namespace Code.Game.Hero
             _bloodlustData = bloodlustData;
             _maxHp = gameData.HeroDefaultHp;
 
-            _currentHp = _maxHp / 2;
+            _currentHp = _maxHp;
             ChangeHPBar();
         }
 
@@ -38,6 +38,7 @@ namespace Code.Game.Hero
 
             _currentHp = _currentHp - damage < 0 ? 0 : _currentHp - damage;
 
+            ChangeHPBar();
             _takeDamage.Visualization();
 
             if (_currentHp <= 0)

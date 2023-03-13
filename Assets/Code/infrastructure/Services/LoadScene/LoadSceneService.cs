@@ -18,8 +18,11 @@ namespace Code.infrastructure.Services.LoadScene
 
         public void Dispose()
         {
-            _cancellationToken?.Cancel();
-            _cancellationToken?.Dispose();
+            if(_cancellationToken == null)
+                return;
+            
+            _cancellationToken.Cancel();
+            _cancellationToken.Dispose();
         }
 
         public async UniTask CurtainOnAsync() =>
@@ -35,7 +38,7 @@ namespace Code.infrastructure.Services.LoadScene
         {
             var load = SceneManager.LoadSceneAsync(sceneName);
 
-            while (!load.isDone)
+            while (load != null && !load.isDone)
                 await UniTask.Yield(cancellationToken: _cancellationToken.Token);
         }
     }
