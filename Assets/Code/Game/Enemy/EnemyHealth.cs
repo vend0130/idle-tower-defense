@@ -11,8 +11,8 @@ namespace Code.Game.Enemy
         [SerializeField] private EnemyView _enemyView;
         [SerializeField] private float _maxHp;
         [SerializeField] private TakeDamageVisualization _takeDamage;
+        [SerializeField] private float _currentHp;
 
-        private float _currentHp;
         private IEnemiesPool _pool;
 
         [Inject]
@@ -21,6 +21,9 @@ namespace Code.Game.Enemy
 
         public void Reset() =>
             _currentHp = _maxHp;
+
+        public void ChangeTypeUnit(UnitType unit) =>
+            Unit = unit;
 
         public void TakeDamage(float damage)
         {

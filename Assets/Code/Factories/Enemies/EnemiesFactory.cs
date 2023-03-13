@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Code.Extensions;
 using Code.Factories.AssetsManagement;
 using Code.Game.Enemy;
 using UnityEngine;
@@ -16,12 +17,11 @@ namespace Code.Factories.Enemies
         private readonly List<EnemyView> _boss = new List<EnemyView>();
         private readonly List<EnemyView> _simply = new List<EnemyView>();
         private readonly Vector2 _defaultPosition = new Vector2(100, 0);
+        private EnemyView _controlledEnemie;
 
         private GameObject _simplyEnemy;
         private GameObject _bossEnemy;
         private Transform _parent;
-
-        public List<EnemyView> EmiesOnScene => _enemiesOnScene;
 
         public EnemiesFactory(IAssetsProvider assetsProvider) =>
             _assetsProvider = assetsProvider;
@@ -36,7 +36,31 @@ namespace Code.Factories.Enemies
             _parent = new GameObject(NameParent).transform;
         }
 
-        public bool TryChangeTarget(Vector2 origin, float minimalDistance, out Transform target)
+        public void AddControlEnemy()
+        {
+            if (_controlledEnemie != null)
+                return;
+
+            EnemyView randomEnemy = _enemiesOnScene.GetRandom();
+            _enemiesOnScene.Remove(randomEnemy);
+            _controlledEnemie = randomEnemy;
+
+            _controlledEnemie.ControlledView.ChangeControlledState(true);
+            _enemiesOnScene.ForEach((currentEnemy) => currentEnemy.AddTarget(_controlledEnemie.EnemyTransform));
+        }
+
+        public void RemoveControlEnemy()
+        {
+            if (_controlledEnemie == null)
+                return;
+
+            _enemiesOnScene.Add(_controlledEnemie);
+            _controlledEnemie.ControlledView.ChangeControlledState(false);
+            _enemiesOnScene.ForEach((currentEnemy) => currentEnemy.RemoveTarget(_controlledEnemie.EnemyTransform));
+            _controlledEnemie = null;
+        }
+
+        public bool TryChangeTarget(Vector2 origin, out Transform target, float? minimalDistance = null)
         {
             if (_enemiesOnScene.Count == 0)
             {
@@ -56,7 +80,7 @@ namespace Code.Factories.Enemies
                 }
             }
 
-            if (currentDistance > minimalDistance)
+            if (minimalDistance != null && currentDistance > minimalDistance)
             {
                 target = null;
                 return false;
@@ -85,14 +109,16 @@ namespace Code.Factories.Enemies
                     break;
             }
 
-            enemyView.Spawn(heroTransform, at);
+            enemyView.Spawn(heroTransform, at, this);
+
+            if (_controlledEnemie != null)
+                enemyView.AddTarget(_controlledEnemie.EnemyTransform);
+
             _enemiesOnScene.Add(enemyView);
         }
 
         public void UnSpawn(EnemyView enemyView)
         {
-            _enemiesOnScene.Remove(enemyView);
-
             switch (enemyView.EnemyType)
             {
                 case EnemyType.Simply:
@@ -103,7 +129,12 @@ namespace Code.Factories.Enemies
                     break;
             }
 
-            enemyView.transform.position = _defaultPosition;
+            if (_controlledEnemie != null && enemyView == _controlledEnemie)
+                RemoveControlEnemy();
+            else
+                _enemiesOnScene.Remove(enemyView);
+
+            enemyView.EnemyTransform.position = _defaultPosition;
         }
 
         private GameObject GetPrefab(EnemyType enemyType)

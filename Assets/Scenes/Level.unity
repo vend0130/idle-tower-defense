@@ -8006,6 +8006,7 @@ MonoBehaviour:
   _camera: {fileID: 2051915676}
   _meteoriteView: {fileID: 1601224761}
   _meteoriteData: {fileID: 11400000, guid: 16f827a6d760c1447bf2eae18467d83e, type: 2}
+  _controlOverEnemyData: {fileID: 11400000, guid: 76e58b78ba03fd04bbc91cc1b3d4c710, type: 2}
 --- !u!114 &1530285303
 MonoBehaviour:
   m_ObjectHideFlags: 0

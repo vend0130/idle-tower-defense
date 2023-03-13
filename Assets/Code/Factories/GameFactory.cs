@@ -1,4 +1,5 @@
-﻿using Code.Controllers.Spawn;
+﻿using System;
+using Code.Controllers.Spawn;
 using Code.Controllers.Spells;
 using Code.Data;
 using Code.Factories.AssetsManagement;
@@ -18,11 +19,13 @@ namespace Code.Factories
         private readonly EndGameState _endGameState;
         private readonly GameData _gameData;
         private readonly MeteoriteData _meteoriteData;
+        private readonly ControlOverEnemyData _controlOverEnemyData;
 
         private HUD _hud;
 
         public GameFactory(IAssetsProvider assetsProvider, DiContainer diContainer,
-            ISpawnController spawnController, EndGameState endGameState, GameData gameData, MeteoriteData meteoriteData)
+            ISpawnController spawnController, EndGameState endGameState, GameData gameData,
+            MeteoriteData meteoriteData, ControlOverEnemyData controlOverEnemyData)
         {
             _assetsProvider = assetsProvider;
             _diContainer = diContainer;
@@ -30,6 +33,7 @@ namespace Code.Factories
             _endGameState = endGameState;
             _gameData = gameData;
             _meteoriteData = meteoriteData;
+            _controlOverEnemyData = controlOverEnemyData;
         }
 
         public void CreateHud()
@@ -65,6 +69,11 @@ namespace Code.Factories
                 case SpellType.Meteorite:
                     spellView.SetData(_meteoriteData.Cooldown, _meteoriteData.Text);
                     break;
+                case SpellType.ControlOverEnemy:
+                    spellView.SetData(_controlOverEnemyData.Cooldown, _controlOverEnemyData.Text);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(spellType), spellType, null);
             }
 
             return spell.GetComponent<SpellView>();

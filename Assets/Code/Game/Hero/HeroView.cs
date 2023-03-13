@@ -25,7 +25,7 @@ namespace Code.Game.Hero
 
         private void LateUpdate()
         {
-            _enemiesFactory.TryChangeTarget(_body.position, _minimalDistanceForAttack, out _target);
+            _enemiesFactory.TryChangeTarget(_body.position, out _target, _minimalDistanceForAttack);
 
             if (_target == null)
                 return;

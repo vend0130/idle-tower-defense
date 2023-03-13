@@ -17,6 +17,7 @@ namespace Code.infrastructure.Root.Level
         [SerializeField] private Camera _camera;
         [SerializeField] private MeteoriteView _meteoriteView;
         [SerializeField] private MeteoriteData _meteoriteData;
+        [SerializeField] private ControlOverEnemyData _controlOverEnemyData;
 
         public override void InstallBindings()
         {
@@ -52,6 +53,9 @@ namespace Code.infrastructure.Root.Level
         {
             Container.BindInterfacesTo<MeteoriteController>().AsSingle();
             Container.Bind<MeteoriteData>().FromInstance(_meteoriteData).AsSingle();
+
+            Container.BindInterfacesTo<ControlOverEnemyController>().AsSingle();
+            Container.Bind<ControlOverEnemyData>().FromInstance(_controlOverEnemyData).AsSingle();
         }
     }
 }

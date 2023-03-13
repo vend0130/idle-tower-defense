@@ -45,4 +45,9 @@ namespace Code.Controllers.Spells
             return new Vector2(x, y);
         }
     }
+    
+    public interface IMeteoriteController
+    {
+        void InitSpellView(SpellView spellView);
+    }
 }
