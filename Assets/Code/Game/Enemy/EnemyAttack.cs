@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Code.Game.Enemy
 {
@@ -12,6 +13,7 @@ namespace Code.Game.Enemy
 
         private float _timeNextAttack;
         private UnitType _target = UnitType.Hero;
+        private const float CastRadius = .1f;
 
         public void Attack()
         {
@@ -27,7 +29,7 @@ namespace Code.Game.Enemy
 
         private bool Hit(out IHealth health)
         {
-            var hit = Physics2D.OverlapCircleNonAlloc(transform.position + transform.forward, 1, _hits);
+            var hit = Physics2D.OverlapCircleNonAlloc(transform.position + transform.up, CastRadius, _hits);
 
             for (int i = 0; i < hit; i++)
             {

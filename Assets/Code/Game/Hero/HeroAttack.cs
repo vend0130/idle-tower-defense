@@ -8,7 +8,6 @@ namespace Code.Game.Hero
     public class HeroAttack : MonoBehaviour
     {
         [SerializeField] private Transform _spawnPoint;
-        [SerializeField] private float _cooldown;
 
         private IArrowFactory _arrowFactory;
         private float _nextTimeAttack;
@@ -28,7 +27,7 @@ namespace Code.Game.Hero
 
             _arrowFactory.Spawn(healthTransform, _gameData.HeroDamage, _spawnPoint.position, body.rotation,
                 _gameData.ArrowSpeed);
-            _nextTimeAttack = Time.time + _cooldown;
+            _nextTimeAttack = Time.time + _gameData.HeroCooldown;
         }
     }
 }
