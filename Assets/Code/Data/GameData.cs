@@ -5,13 +5,13 @@ namespace Code.Data
     [CreateAssetMenu(fileName = nameof(GameData), menuName = "Static Data/" + nameof(GameData), order = 0)]
     public class GameData : ScriptableObject
     {
-        [Header("Spawn")] [Tooltip("in seconds")] [SerializeField]
+        [Header("Spawn")] [Tooltip("in seconds"), SerializeField]
         private float _spawnTimeSimplyEnemy = 1f;
 
-        [Tooltip("in seconds")] [SerializeField]
+        [Tooltip("in seconds"), SerializeField]
         private float _spawnTimeBossEnemy = 60f;
 
-        [Tooltip("in percentages")] [SerializeField, Range(0, 100)]
+        [Tooltip("in percentages"), SerializeField, Range(0, 100)]
         private int _chanceSpawnInBottomAndTop = 65;
 
         [field: SerializeField, Header("Hero")]
@@ -19,6 +19,7 @@ namespace Code.Data
 
         [field: SerializeField] public int MinimalDistanceForAttack { get; private set; } = 4;
         [field: SerializeField] public Vector2 HeroSpawnPoint { get; private set; } = Vector2.zero;
+        [field: SerializeField] public float ArrowSpeed { get; private set; } = 18;
 
         public int SpawnTimeSimplyEnemy => (int)(_spawnTimeSimplyEnemy * 1000);
         public float SpawnTimeBossEnemy => _spawnTimeBossEnemy;

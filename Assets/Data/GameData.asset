@@ -17,3 +17,5 @@ MonoBehaviour:
   _chanceSpawnInBottomAndTop: 65
   <HeroDefaultHp>k__BackingField: 300
   <MinimalDistanceForAttack>k__BackingField: 4
+  <HeroSpawnPoint>k__BackingField: {x: 0, y: 0}
+  <ArrowSpeed>k__BackingField: 18

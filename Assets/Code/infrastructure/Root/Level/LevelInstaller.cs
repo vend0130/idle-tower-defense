@@ -1,5 +1,6 @@
 ﻿using Code.Controllers.Spawn;
 using Code.Factories;
+using Code.Factories.Arrow;
 using Code.Factories.AssetsManagement;
 using Code.Factories.Enemies;
 using Code.Model.Spawn;
@@ -29,6 +30,7 @@ namespace Code.infrastructure.Root.Level
             Container.BindInterfacesTo<AssetsProvider>().AsSingle();
             Container.BindInterfacesTo<GameFactory>().AsSingle();
             Container.BindInterfacesTo<EnemiesFactory>().AsSingle();
+            Container.BindInterfacesTo<ArrowFactory>().AsSingle();
         }
 
         private void BindSpawnLogic()
