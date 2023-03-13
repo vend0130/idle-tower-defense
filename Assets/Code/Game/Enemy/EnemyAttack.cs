@@ -8,9 +8,10 @@ namespace Code.Game.Enemy
         [SerializeField] private float _damage = 2f;
         [SerializeField] private float _cooldown = 1f;
 
-        private readonly Collider2D[] _hits = new Collider2D[3];
+        private readonly Collider2D[] _hits = new Collider2D[6];
 
         private float _timeNextAttack;
+        private UnitType _target = UnitType.Hero;
 
         public void Attack()
         {
@@ -30,7 +31,7 @@ namespace Code.Game.Enemy
 
             for (int i = 0; i < hit; i++)
             {
-                if (_hits[i].TryGetComponent(out health))
+                if (_hits[i].TryGetComponent(out health) && health.Current != transform && health.Unit == _target)
                     return true;
             }
 

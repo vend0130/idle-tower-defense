@@ -200,6 +200,10 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: -0.036579676
       objectReference: {fileID: 0}
+    - target: {fileID: 8138795998731981937, guid: 40b65c55404eecd4790e94f221053f70, type: 3}
+      propertyPath: <EnemyType>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8484085580101477092, guid: 40b65c55404eecd4790e94f221053f70, type: 3}
       propertyPath: m_RootOrder
       value: 0

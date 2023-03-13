@@ -23,11 +23,10 @@ namespace Code.Game.Hero
             _minimalDistanceForAttack = gameData.MinimalDistanceForAttack;
         }
 
-        private void FixedUpdate() =>
-            _enemiesFactory.TryChangeTarget(_body.position, _minimalDistanceForAttack, out _target);
-
         private void LateUpdate()
         {
+            _enemiesFactory.TryChangeTarget(_body.position, _minimalDistanceForAttack, out _target);
+
             if (_target == null)
                 return;
 

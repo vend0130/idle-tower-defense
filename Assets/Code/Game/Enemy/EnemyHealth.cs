@@ -1,19 +1,26 @@
-﻿using UnityEngine;
+﻿using Code.Factories.Enemies;
+using UnityEngine;
+using Zenject;
 
 namespace Code.Game.Enemy
 {
     public class EnemyHealth : MonoBehaviour, IHealth
     {
+        [field: SerializeField] public UnitType Unit { get; private set; }
         [field: SerializeField] public Transform Current { get; private set; }
+        [SerializeField] private EnemyView _enemyView;
         [SerializeField] private float _maxHp;
         [SerializeField] private TakeDamageVisualization _takeDamage;
 
         private float _currentHp;
+        private IEnemiesPool _pool;
 
-        private void Awake()
-        {
+        [Inject]
+        public void Constructor(IEnemiesPool pool) =>
+            _pool = pool;
+
+        public void Reset() =>
             _currentHp = _maxHp;
-        }
 
         public void TakeDamage(float damage)
         {
@@ -25,7 +32,8 @@ namespace Code.Game.Enemy
 
             if (_currentHp == 0)
             {
-                Debug.Log("Death");
+                _enemyView.gameObject.SetActive(false);
+                _pool.UnSpawn(_enemyView);
             }
         }
     }

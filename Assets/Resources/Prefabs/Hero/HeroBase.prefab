@@ -137,6 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5326873ebde45b794b152bda082c4e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Unit>k__BackingField: 0
   <Current>k__BackingField: {fileID: 4640196951702182896}
   _takeDamage: {fileID: 5071056154168642427}
 --- !u!114 &5348609657004748145

@@ -56,14 +56,14 @@ namespace Code.Controllers.Spawn
                 return;
 
             EnemyType enemyType = EnemyType.Simply;
-            
+
             if (Time.time > _nextTimeForSpawnBoss)
             {
                 enemyType = EnemyType.Boss;
                 _nextTimeForSpawnBoss = Time.time + _gameData.SpawnTimeBossEnemy;
             }
 
-            _enemiesFactory.CreateEnemy(enemyType, GetSpawnPoint(), _heroTransform);
+            _enemiesFactory.Spawn(enemyType, GetSpawnPoint(), _heroTransform);
             Delay().Forget();
         }
 

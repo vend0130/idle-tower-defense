@@ -8,6 +8,7 @@ namespace Code.Game.Hero
 {
     public class HeroHealth : MonoBehaviour, IHealth
     {
+        [field: SerializeField] public UnitType Unit { get; private set; }
         [field: SerializeField] public Transform Current { get; private set; }
 
         [SerializeField] private TakeDamageVisualization _takeDamage;
