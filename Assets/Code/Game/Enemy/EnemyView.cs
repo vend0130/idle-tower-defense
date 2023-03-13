@@ -63,7 +63,7 @@ namespace Code.Game.Enemy
 
         public void AddTarget(Transform target)
         {
-            if (!_targets.Contains(target))
+            if (!_targets.Contains(target) && target != EnemyTransform)
                 _targets.Add(target);
         }
 
@@ -78,7 +78,7 @@ namespace Code.Game.Enemy
                 return;
             }
 
-            if (_targets.Count == 0)
+            if (_targets.Count == 0 || _targets[0] == null)
             {
                 _target = null;
                 return;

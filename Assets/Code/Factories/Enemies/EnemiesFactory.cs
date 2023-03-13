@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Code.Extensions;
 using Code.Factories.AssetsManagement;
 using Code.Game.Enemy;
 using UnityEngine;
 using Zenject;
+using Random = UnityEngine.Random;
 
 namespace Code.Factories.Enemies
 {
     public class EnemiesFactory : IInitializable, IEnemiesFactory, IEnemiesPool
     {
+        public event Action RemovedControlHandler;
+
         private const string NameParent = "Enemies";
 
         private readonly IAssetsProvider _assetsProvider;
@@ -41,7 +45,7 @@ namespace Code.Factories.Enemies
             if (_controlledEnemie != null)
                 return;
 
-            EnemyView randomEnemy = _enemiesOnScene.GetRandom();
+            EnemyView randomEnemy = _enemiesOnScene.Where(x => x.EnemyType != EnemyType.Boss).GetRandom();
             _enemiesOnScene.Remove(randomEnemy);
             _controlledEnemie = randomEnemy;
 
@@ -49,13 +53,19 @@ namespace Code.Factories.Enemies
             _enemiesOnScene.ForEach((currentEnemy) => currentEnemy.AddTarget(_controlledEnemie.EnemyTransform));
         }
 
-        public void RemoveControlEnemy()
+        public void RemoveControlEnemy(bool unSpawn = false)
         {
             if (_controlledEnemie == null)
                 return;
 
-            _enemiesOnScene.Add(_controlledEnemie);
-            _controlledEnemie.ControlledView.ChangeControlledState(false);
+            RemovedControlHandler?.Invoke();
+
+            if (!unSpawn)
+            {
+                AddEnemy(_controlledEnemie);
+                _controlledEnemie.ControlledView.ChangeControlledState(false);
+            }
+
             _enemiesOnScene.ForEach((currentEnemy) => currentEnemy.RemoveTarget(_controlledEnemie.EnemyTransform));
             _controlledEnemie = null;
         }
@@ -131,7 +141,7 @@ namespace Code.Factories.Enemies
             if (_controlledEnemie != null)
                 enemyView.AddTarget(_controlledEnemie.EnemyTransform);
 
-            _enemiesOnScene.Add(enemyView);
+            AddEnemy(enemyView);
         }
 
         public void UnSpawn(EnemyView enemyView)
@@ -147,11 +157,19 @@ namespace Code.Factories.Enemies
             }
 
             if (_controlledEnemie != null && enemyView == _controlledEnemie)
-                RemoveControlEnemy();
+                RemoveControlEnemy(unSpawn: true);
             else
                 _enemiesOnScene.Remove(enemyView);
 
             enemyView.EnemyTransform.position = _defaultPosition;
+        }
+
+        private void AddEnemy(EnemyView enemyView)
+        {
+            if (_enemiesOnScene.Contains(enemyView))
+                return;
+
+            _enemiesOnScene.Add(enemyView);
         }
 
         private GameObject GetPrefab(EnemyType enemyType)

@@ -12,7 +12,7 @@ namespace Code.Game.Arrow
 
         private const int TimeMove = 3000;
 
-        private readonly CancellationTokenSource _cancellationToken = new CancellationTokenSource();
+        private CancellationTokenSource _cancellationToken;
 
         private IArrowPoolable _pool;
         private Transform _attacker;
@@ -30,20 +30,15 @@ namespace Code.Game.Arrow
             }
         }
 
-        private void OnDestroy()
-        {
-            if (_cancellationToken == null)
-                return;
-
-            _cancellationToken.Cancel();
-            _cancellationToken.Dispose();
-        }
+        private void OnDestroy() =>
+            DisposeToken();
 
         public void InitPool(IArrowPoolable pool) =>
             _pool = pool;
 
         public void Activate(Transform attacker, float damege, float speed)
         {
+            _cancellationToken = new CancellationTokenSource();
             _attacker = attacker;
             _damage = damege;
             _speed = speed;
@@ -62,8 +57,19 @@ namespace Code.Game.Arrow
             if (!gameObject.activeSelf)
                 return;
 
+            DisposeToken();
             gameObject.SetActive(false);
             _pool.UnSpawn(this);
+        }
+
+        private void DisposeToken()
+        {
+            if (_cancellationToken == null)
+                return;
+
+            _cancellationToken.Cancel();
+            _cancellationToken.Dispose();
+            _cancellationToken = null;
         }
     }
 }
