@@ -1,4 +1,5 @@
 ﻿using Code.Controllers.Spawn;
+using Code.Controllers.Spells;
 using Code.Factories;
 using Code.infrastructure.StateMachine.States;
 using Code.Model.Spawn;
@@ -14,10 +15,11 @@ namespace Code.infrastructure.Root.Level
         private readonly EndGameState _endGameState;
         private readonly ISpawnController _spawnController;
         private readonly ISpawnModel _spawnModel;
+        private readonly IMeteoriteController _meteoriteController;
 
         public LevelInitialize(IGameFactory gameFactory, LoadLevelState loadLevelState,
-            GameLoopState gameLoopState, EndGameState endGameState, ISpawnController spawnController, 
-            ISpawnModel spawnModel)
+            GameLoopState gameLoopState, EndGameState endGameState, ISpawnController spawnController,
+            ISpawnModel spawnModel, IMeteoriteController meteoriteController)
         {
             _gameFactory = gameFactory;
             _loadLevelState = loadLevelState;
@@ -25,6 +27,7 @@ namespace Code.infrastructure.Root.Level
             _endGameState = endGameState;
             _spawnController = spawnController;
             _spawnModel = spawnModel;
+            _meteoriteController = meteoriteController;
         }
 
         public void Initialize()
@@ -32,7 +35,7 @@ namespace Code.infrastructure.Root.Level
             _spawnModel.Init();
             _endGameState.InitGameFactory(_gameFactory);
             _gameLoopState.InitSpawnController(_spawnController);
-            _loadLevelState.InitGameFactory(_gameFactory);
+            _loadLevelState.InitLevelData(_gameFactory, _meteoriteController);
         }
     }
 }

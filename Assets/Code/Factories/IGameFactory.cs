@@ -1,4 +1,6 @@
-﻿using Code.Game.Hero;
+﻿using Code.Controllers.Spells;
+using Code.Game.Hero;
+using Code.Game.UI;
 
 namespace Code.Factories
 {
@@ -7,5 +9,6 @@ namespace Code.Factories
         void CreateHud();
         HeroHealth CreateHero();
         void CreateEndGame();
+        SpellView CreateSpell(SpellType spellType);
     }
 }

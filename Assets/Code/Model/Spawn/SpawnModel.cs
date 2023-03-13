@@ -4,8 +4,11 @@ namespace Code.Model.Spawn
 {
     public class SpawnModel : ISpawnModel
     {
-        private readonly Camera _camera;
+        public Vector2 HalfScreenSize { get; private set; }
+
         private const float Offset = .5f;
+
+        private readonly Camera _camera;
 
         private SidePoints[] _spawnSides;
 
@@ -14,12 +17,12 @@ namespace Code.Model.Spawn
 
         public void Init()
         {
-            Vector2 halfScreenSize =
+            HalfScreenSize =
                 _camera.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
 
             _spawnSides = new[]
             {
-                GetTop(halfScreenSize), GetLeft(halfScreenSize), GetRight(halfScreenSize), GetBottom(halfScreenSize)
+                GetTop(HalfScreenSize), GetLeft(HalfScreenSize), GetRight(HalfScreenSize), GetBottom(HalfScreenSize)
             };
         }
 

@@ -1,4 +1,5 @@
-﻿using Code.Factories;
+﻿using Code.Controllers.Spells;
+using Code.Factories;
 using Code.Game.Hero;
 using Code.infrastructure.Services.LoadScene;
 using Cysharp.Threading.Tasks;
@@ -12,6 +13,7 @@ namespace Code.infrastructure.StateMachine.States
         private IGameFactory _gameFactory;
         private IStateMachine _stateMachine;
         private HeroHealth _heroHealth;
+        private IMeteoriteController _meteoriteController;
 
         public LoadLevelState(ILoadScene loadScene) =>
             _loadScene = loadScene;
@@ -19,8 +21,11 @@ namespace Code.infrastructure.StateMachine.States
         public void InitGameStateMachine(IStateMachine stateMachine) =>
             _stateMachine = stateMachine;
 
-        public void InitGameFactory(IGameFactory gameFactory) =>
+        public void InitLevelData(IGameFactory gameFactory, IMeteoriteController meteoriteController)
+        {
+            _meteoriteController = meteoriteController;
             _gameFactory = gameFactory;
+        }
 
         public async void Enter(string sceneName)
         {
@@ -41,6 +46,7 @@ namespace Code.infrastructure.StateMachine.States
         {
             _gameFactory.CreateHud();
             _heroHealth = _gameFactory.CreateHero();
+            _meteoriteController.InitSpellView(_gameFactory.CreateSpell(SpellType.Meteorite));
             await UniTask.Yield();
         }
     }

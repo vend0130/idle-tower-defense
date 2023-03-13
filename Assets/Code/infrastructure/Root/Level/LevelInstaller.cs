@@ -1,9 +1,11 @@
 ﻿using Code.Controllers.Spawn;
+using Code.Controllers.Spells;
 using Code.Factories;
 using Code.Factories.Arrow;
 using Code.Factories.AssetsManagement;
 using Code.Factories.Enemies;
 using Code.Model.Spawn;
+using Code.Views.Spells;
 using UnityEngine;
 using Zenject;
 
@@ -12,18 +14,23 @@ namespace Code.infrastructure.Root.Level
     public class LevelInstaller : MonoInstaller
     {
         [SerializeField] private Camera _camera;
+        [SerializeField] private MeteoriteView _meteoriteView;
 
         public override void InstallBindings()
         {
             BindFactories();
             BindSpawnLogic();
-            BindCamera();
+            BindInstance();
+            BindSpells();
 
             Container.BindInterfacesTo<LevelInitialize>().AsSingle();
         }
 
-        private void BindCamera() =>
+        private void BindInstance()
+        {
             Container.Bind<Camera>().FromInstance(_camera).AsSingle();
+            Container.Bind<MeteoriteView>().FromInstance(_meteoriteView).AsSingle();
+        }
 
         private void BindFactories()
         {
@@ -37,6 +44,11 @@ namespace Code.infrastructure.Root.Level
         {
             Container.BindInterfacesTo<EnemiesSpawnController>().AsSingle();
             Container.BindInterfacesTo<SpawnModel>().AsSingle();
+        }
+
+        private void BindSpells()
+        {
+            Container.BindInterfacesTo<MeteoriteController>().AsSingle();
         }
     }
 }

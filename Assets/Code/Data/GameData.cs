@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Code.Data
 {
@@ -23,8 +24,18 @@ namespace Code.Data
         [field: SerializeField] public float HeroDamage { get; private set; } = 5;
         [field: SerializeField] public float HeroCooldown { get; private set; } = .5f;
 
+        [field: SerializeField, Header("Spells")]
+        public SpellData Meteorite { get; private set; }
+
         public int SpawnTimeSimplyEnemy => (int)(_spawnTimeSimplyEnemy * 1000);
         public float SpawnTimeBossEnemy => _spawnTimeBossEnemy;
         public float ChanceSpawnInBottomAndTop => (float)_chanceSpawnInBottomAndTop / 100;
+    }
+
+    [Serializable]
+    public class SpellData
+    {
+        [field: SerializeField] public float Cooldown { get; private set; } = 10;
+        [field: SerializeField] public string Text { get; private set; } = "Текст";
     }
 }

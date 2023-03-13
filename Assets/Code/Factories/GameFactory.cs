@@ -1,4 +1,5 @@
 ﻿using Code.Controllers.Spawn;
+using Code.Controllers.Spells;
 using Code.Data;
 using Code.Factories.AssetsManagement;
 using Code.Game.Hero;
@@ -17,6 +18,8 @@ namespace Code.Factories
         private readonly EndGameState _endGameState;
         private readonly GameData _gameData;
 
+        private HUD _hud;
+
         public GameFactory(IAssetsProvider assetsProvider, DiContainer diContainer,
             ISpawnController spawnController, EndGameState endGameState, GameData gameData)
         {
@@ -31,7 +34,8 @@ namespace Code.Factories
         {
             GameObject hud = Instantiate(AssetPath.HUDPath, Vector2.zero);
 
-            _endGameState.InitHud(hud.GetComponent<HUD>());
+            _hud = hud.GetComponent<HUD>();
+            _endGameState.InitHud(_hud);
             _diContainer.Bind<HPBar>().FromInstance(hud.GetComponentInChildren<HPBar>()).AsSingle();
         }
 
@@ -45,6 +49,24 @@ namespace Code.Factories
 
         public void CreateEndGame() =>
             Instantiate(AssetPath.EndGamePath, Vector2.zero);
+
+        public SpellView CreateSpell(SpellType spellType)
+        {
+            GameObject spell = Instantiate(AssetPath.SpellViewPath, Vector2.zero);
+            spell.transform.SetParent(_hud.SpellsParent);
+            spell.transform.localScale = Vector3.one;
+
+            SpellView spellView = spell.GetComponent<SpellView>();
+
+            switch (spellType)
+            {
+                case SpellType.Meteorite:
+                    spellView.SetData(_gameData.Meteorite.Cooldown, _gameData.Meteorite.Text);
+                    break;
+            }
+
+            return spell.GetComponent<SpellView>();
+        }
 
         private GameObject Instantiate(string path, Vector2 at)
         {
