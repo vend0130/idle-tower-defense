@@ -1,5 +1,5 @@
 ﻿using Code.Controllers.Spawn;
-using Code.Factories.Assets;
+using Code.Factories.AssetsManagement;
 using Code.Game.Hero;
 using Code.Game.UI;
 using Code.infrastructure.StateMachine.States;

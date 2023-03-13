@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Code.Factories.Assets;
+using Code.Factories.AssetsManagement;
 using Code.Game.Enemy;
 using UnityEngine;
 

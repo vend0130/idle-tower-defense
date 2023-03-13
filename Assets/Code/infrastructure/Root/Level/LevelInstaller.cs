@@ -1,6 +1,6 @@
 ﻿using Code.Controllers.Spawn;
 using Code.Factories;
-using Code.Factories.Assets;
+using Code.Factories.AssetsManagement;
 using Code.Factories.Enemies;
 using Code.Model.Spawn;
 using UnityEngine;

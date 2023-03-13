@@ -1,4 +1,4 @@
-﻿namespace Code.Factories.Assets
+﻿namespace Code.Factories.AssetsManagement
 {
     public static class AssetPath
     {
