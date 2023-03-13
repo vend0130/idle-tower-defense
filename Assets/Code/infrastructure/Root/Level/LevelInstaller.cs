@@ -1,5 +1,6 @@
 ﻿using Code.Controllers.Spawn;
 using Code.Controllers.Spells;
+using Code.Data;
 using Code.Factories;
 using Code.Factories.Arrow;
 using Code.Factories.AssetsManagement;
@@ -15,6 +16,7 @@ namespace Code.infrastructure.Root.Level
     {
         [SerializeField] private Camera _camera;
         [SerializeField] private MeteoriteView _meteoriteView;
+        [SerializeField] private MeteoriteData _meteoriteData;
 
         public override void InstallBindings()
         {
@@ -49,6 +51,7 @@ namespace Code.infrastructure.Root.Level
         private void BindSpells()
         {
             Container.BindInterfacesTo<MeteoriteController>().AsSingle();
+            Container.Bind<MeteoriteData>().FromInstance(_meteoriteData).AsSingle();
         }
     }
 }

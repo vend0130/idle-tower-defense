@@ -1,6 +1,10 @@
-﻿using Code.Extensions;
+﻿using System.Collections.Generic;
+using Code.Data;
+using Code.Extensions;
+using Code.Game;
 using DG.Tweening;
 using UnityEngine;
+using Zenject;
 
 namespace Code.Views.Spells
 {
@@ -9,12 +13,18 @@ namespace Code.Views.Spells
         [SerializeField] private Transform _moveObject;
         [SerializeField] private Transform _shadownObject;
         [SerializeField] private Vector2 _startPoint;
-        [SerializeField] private float _speed;
+
+        private readonly Collider2D[] _hits = new Collider2D[20];
 
         private Tween _tween;
+        private MeteoriteData _meteoriteData;
 
-        private void Awake() =>
+        [Inject]
+        public void Constructor(MeteoriteData meteoriteData)
+        {
+            _meteoriteData = meteoriteData;
             Hide();
+        }
 
         private void OnDestroy() =>
             _tween.SimpleKill();
@@ -35,13 +45,29 @@ namespace Code.Views.Spells
         {
             _tween.SimpleKill();
             float distance = Vector2.Distance(_startPoint, endPoint);
-            _tween = _moveObject.DOMove(endPoint, distance / _speed).SetEase(Ease.Linear);
+            _tween = _moveObject.DOMove(endPoint, distance / _meteoriteData.Speed).SetEase(Ease.Linear);
             _tween?.OnComplete(EndFall);
         }
 
         private void EndFall()
         {
             Hide();
+            Hits();
+        }
+
+        private void Hits()
+        {
+            List<IHealth> enemies = new List<IHealth>();
+            int hits = Physics2D.OverlapCircleNonAlloc(_moveObject.position, _moveObject.localScale.x, _hits);
+
+            for (int i = 0; i < hits; i++)
+            {
+                if (_hits[i].TryGetComponent(out IHealth health) && health.Unit == UnitType.Enemy)
+                    enemies.Add(health);
+            }
+
+            foreach (var enemy in enemies)
+                enemy.TakeDamage(100 + (10 * enemies.Count));
         }
 
         private void Hide()

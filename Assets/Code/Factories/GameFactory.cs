@@ -17,17 +17,19 @@ namespace Code.Factories
         private readonly ISpawnController _spawnController;
         private readonly EndGameState _endGameState;
         private readonly GameData _gameData;
+        private readonly MeteoriteData _meteoriteData;
 
         private HUD _hud;
 
         public GameFactory(IAssetsProvider assetsProvider, DiContainer diContainer,
-            ISpawnController spawnController, EndGameState endGameState, GameData gameData)
+            ISpawnController spawnController, EndGameState endGameState, GameData gameData, MeteoriteData meteoriteData)
         {
             _assetsProvider = assetsProvider;
             _diContainer = diContainer;
             _spawnController = spawnController;
             _endGameState = endGameState;
             _gameData = gameData;
+            _meteoriteData = meteoriteData;
         }
 
         public void CreateHud()
@@ -61,7 +63,7 @@ namespace Code.Factories
             switch (spellType)
             {
                 case SpellType.Meteorite:
-                    spellView.SetData(_gameData.Meteorite.Cooldown, _gameData.Meteorite.Text);
+                    spellView.SetData(_meteoriteData.Cooldown, _meteoriteData.Text);
                     break;
             }
 

@@ -8005,6 +8005,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _camera: {fileID: 2051915676}
   _meteoriteView: {fileID: 1601224761}
+  _meteoriteData: {fileID: 11400000, guid: 16f827a6d760c1447bf2eae18467d83e, type: 2}
 --- !u!114 &1530285303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8145,8 +8146,6 @@ MonoBehaviour:
   _moveObject: {fileID: 2044561466}
   _shadownObject: {fileID: 1952771956}
   _startPoint: {x: 0, y: 12}
-  _speed: 20
-  _endPoint: {fileID: 1952771956}
 --- !u!1 &1619784352
 GameObject:
   m_ObjectHideFlags: 0
