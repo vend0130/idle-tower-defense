@@ -1,31 +1,29 @@
-﻿using Code.Game.Hero;
-using UnityEngine;
-using Zenject;
+﻿using UnityEngine;
 
 namespace Code.Game.Enemy
 {
     public class EnemyView : MonoBehaviour
     {
+        [field: SerializeField] public Transform EnemyTransform { get; private set; }
         [SerializeField] private EnemyMove _move;
         [SerializeField] private EnemyAttack _attack;
-        [SerializeField] private Transform _current;
         [SerializeField] private float _minimalDistanceToHero = .75f;
 
         private Transform _target;
         private bool _isMoving;
 
-        [Inject]
-        public void Constructor(HeroRotation hero)
-        {
-            _target = hero.transform;
-        }
+        public void Init(Transform hero) =>
+            _target = hero;
 
         private void Update()
         {
             if (_target == null)
+            {
+                _move.StopMove();
                 return;
+            }
 
-            float distance = Vector2.Distance(_current.position, _target.position);
+            float distance = Vector2.Distance(EnemyTransform.position, _target.position);
 
             if (HeroNotReached(distance))
             {
@@ -34,10 +32,10 @@ namespace Code.Game.Enemy
             }
             else
             {
-                _move.Move(_current, distance, _target.position);
+                _move.Move(EnemyTransform, distance, _target.position);
             }
 
-            _move.Rotation(_current, _target.position);
+            _move.Rotation(EnemyTransform, _target.position);
         }
 
         private bool HeroNotReached(float distance) =>

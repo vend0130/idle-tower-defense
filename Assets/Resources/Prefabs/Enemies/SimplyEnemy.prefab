@@ -125,13 +125,25 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8905804857038030544, guid: 40b65c55404eecd4790e94f221053f70, type: 3}
+      propertyPath: _speed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8905804857038030544, guid: 40b65c55404eecd4790e94f221053f70, type: 3}
       propertyPath: _animator
       value: 
       objectReference: {fileID: 1091191679}
     - target: {fileID: -4886712249820533609, guid: 40b65c55404eecd4790e94f221053f70, type: 3}
+      propertyPath: _damage
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -4886712249820533609, guid: 40b65c55404eecd4790e94f221053f70, type: 3}
       propertyPath: _animator
       value: 
       objectReference: {fileID: 1091191679}
+    - target: {fileID: -4886712249820533609, guid: 40b65c55404eecd4790e94f221053f70, type: 3}
+      propertyPath: _cooldown
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2261632231247670150, guid: 40b65c55404eecd4790e94f221053f70, type: 3}
       propertyPath: m_Name
       value: SimplyEnemy

@@ -10,12 +10,13 @@ namespace Code.infrastructure.StateMachine
 
         private IState _activeState;
 
-        public GameStateMachine(LoadLevelState loadLevelState, GameLoopState gameLoopState)
+        public GameStateMachine(LoadLevelState loadLevelState, GameLoopState gameLoopState, EndGameState endGameState)
         {
             _states = new Dictionary<Type, IState>()
             {
                 [typeof(LoadLevelState)] = loadLevelState,
                 [typeof(GameLoopState)] = gameLoopState,
+                [typeof(EndGameState)] = endGameState,
             };
         }
 

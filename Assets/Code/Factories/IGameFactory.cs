@@ -1,7 +1,11 @@
-﻿namespace Code.Factories
+﻿using Code.Game.Hero;
+
+namespace Code.Factories
 {
     public interface IGameFactory
     {
-        void CreateHero();
+        void CreateHud();
+        HeroHealth CreateHero();
+        void CreateEndGame();
     }
 }

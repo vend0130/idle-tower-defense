@@ -1,4 +1,5 @@
 ﻿using Code.Factories;
+using Code.Game.Hero;
 using Code.infrastructure.Services.LoadScene;
 using Cysharp.Threading.Tasks;
 
@@ -10,6 +11,7 @@ namespace Code.infrastructure.StateMachine.States
 
         private IGameFactory _gameFactory;
         private IStateMachine _stateMachine;
+        private HeroHealth _heroHealth;
 
         public LoadLevelState(ILoadScene loadScene) =>
             _loadScene = loadScene;
@@ -27,7 +29,8 @@ namespace Code.infrastructure.StateMachine.States
             await UniTask.WaitWhile(() => _gameFactory == null);
             await CreateWorld();
             await _loadScene.CurtainOffAsync();
-            _stateMachine.Enter<GameLoopState>();
+
+            _stateMachine.Enter<GameLoopState, HeroHealth>(_heroHealth);
         }
 
         public void Exit()
@@ -36,7 +39,8 @@ namespace Code.infrastructure.StateMachine.States
 
         private async UniTask CreateWorld()
         {
-            _gameFactory.CreateHero();
+            _gameFactory.CreateHud();
+            _heroHealth = _gameFactory.CreateHero();
             await UniTask.Yield();
         }
     }

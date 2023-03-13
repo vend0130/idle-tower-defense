@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8108622257202787826}
   - component: {fileID: 3214384444564928965}
   - component: {fileID: 7023742677746641784}
+  - component: {fileID: 577189275634059877}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -26,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4680591917990175283}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.2, z: 0}
+  m_LocalScale: {x: 1, y: -1, z: 1}
   m_Children: []
   m_Father: {fileID: 7931178212720769242}
   m_RootOrder: 0
@@ -103,6 +104,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &577189275634059877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4680591917990175283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93108b91da7140288da1a7435d10fefe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 7023742677746641784}
 --- !u!1001 &3821018104627044150
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -113,6 +127,22 @@ PrefabInstance:
     - target: {fileID: -8905804857038030544, guid: 40b65c55404eecd4790e94f221053f70, type: 3}
       propertyPath: _speed
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8905804857038030544, guid: 40b65c55404eecd4790e94f221053f70, type: 3}
+      propertyPath: _animator
+      value: 
+      objectReference: {fileID: 577189275634059877}
+    - target: {fileID: -4886712249820533609, guid: 40b65c55404eecd4790e94f221053f70, type: 3}
+      propertyPath: _damage
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -4886712249820533609, guid: 40b65c55404eecd4790e94f221053f70, type: 3}
+      propertyPath: _animator
+      value: 
+      objectReference: {fileID: 577189275634059877}
+    - target: {fileID: -4886712249820533609, guid: 40b65c55404eecd4790e94f221053f70, type: 3}
+      propertyPath: _cooldown
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2261632231247670150, guid: 40b65c55404eecd4790e94f221053f70, type: 3}
       propertyPath: m_Name

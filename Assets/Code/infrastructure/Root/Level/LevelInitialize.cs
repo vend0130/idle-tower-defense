@@ -11,15 +11,18 @@ namespace Code.infrastructure.Root.Level
         private readonly IGameFactory _gameFactory;
         private readonly LoadLevelState _loadLevelState;
         private readonly GameLoopState _gameLoopState;
+        private readonly EndGameState _endGameState;
         private readonly ISpawnController _spawnController;
         private readonly ISpawnModel _spawnModel;
 
         public LevelInitialize(IGameFactory gameFactory, LoadLevelState loadLevelState,
-            GameLoopState gameLoopState, ISpawnController spawnController, ISpawnModel spawnModel)
+            GameLoopState gameLoopState, EndGameState endGameState,
+            ISpawnController spawnController, ISpawnModel spawnModel)
         {
             _gameFactory = gameFactory;
             _loadLevelState = loadLevelState;
             _gameLoopState = gameLoopState;
+            _endGameState = endGameState;
             _spawnController = spawnController;
             _spawnModel = spawnModel;
         }
@@ -27,6 +30,7 @@ namespace Code.infrastructure.Root.Level
         public void Initialize()
         {
             _spawnModel.Init();
+            _endGameState.InitGameFactory(_gameFactory);
             _gameLoopState.InitSpawnController(_spawnController);
             _loadLevelState.InitGameFactory(_gameFactory);
         }

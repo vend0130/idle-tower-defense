@@ -46,9 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a699e61edaef43a9b5fde1940571f4f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <EnemyTransform>k__BackingField: {fileID: 8484085580101477092}
   _move: {fileID: -8905804857038030544}
   _attack: {fileID: -4886712249820533609}
-  _current: {fileID: 8484085580101477092}
   _minimalDistanceToHero: 0.75
 --- !u!114 &-8905804857038030544
 MonoBehaviour:
@@ -77,6 +77,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 0}
+  _damage: 2
   _cooldown: 1
 --- !u!1 &7307327324100549388
 GameObject:

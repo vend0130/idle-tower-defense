@@ -1,5 +1,8 @@
-﻿using Code.Extensions;
+﻿using Code.Data;
+using Code.Extensions;
+using Code.Factories.Enemies;
 using UnityEngine;
+using Zenject;
 
 namespace Code.Game.Hero
 {
@@ -7,13 +10,22 @@ namespace Code.Game.Hero
     {
         [SerializeField] private Transform _body;
 
-        [SerializeField] private Transform _target;
+        private Transform _target;
+        private IEnemiesPool _enemiesFactory;
+        private float _minimalDistanceForAttack;
+
+        [Inject]
+        public void Constructor(IEnemiesPool enemiesFactory, GameData gameData)
+        {
+            _enemiesFactory = enemiesFactory;
+            _minimalDistanceForAttack = gameData.MinimalDistanceForAttack;
+        }
+
+        private void FixedUpdate() =>
+            _enemiesFactory.TryChangeTarget(_body.position, _minimalDistanceForAttack, out _target);
 
         private void LateUpdate() =>
             Rotation();
-
-        public void ChangeTarget(Transform target) =>
-            _target = target;
 
         private void Rotation()
         {

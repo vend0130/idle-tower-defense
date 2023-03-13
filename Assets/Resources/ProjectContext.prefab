@@ -75,6 +75,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _curtain: {fileID: 5810820488013164450}
+  _gameData: {fileID: 11400000, guid: 5de8c195454808648bd6b30726393b81, type: 2}
 --- !u!1001 &3888653192281634040
 PrefabInstance:
   m_ObjectHideFlags: 0
