@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f6fe2c738c443a8a4abdfda0d3a7ea0, type: 3}
   m_Name: GameData
   m_EditorClassIdentifier: 
-  _spawnTimeSimplyEnemy: 1
+  _spawnTimeSimplyEnemy: 100
   _spawnTimeBossEnemy: 60
   _chanceSpawnInBottomAndTop: 65
   <HeroDefaultHp>k__BackingField: 300
   <MinimalDistanceForAttack>k__BackingField: 4
   <HeroSpawnPoint>k__BackingField: {x: 0, y: 0}
-  <ArrowSpeed>k__BackingField: 1
+  <ArrowSpeed>k__BackingField: 10
   <HeroDamage>k__BackingField: 5
   <HeroCooldown>k__BackingField: 0.5

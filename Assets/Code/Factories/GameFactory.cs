@@ -42,18 +42,22 @@ namespace Code.Factories
         public void CreateHud()
         {
             GameObject hud = Instantiate(AssetPath.HUDPath, Vector2.zero);
+            _diContainer.Bind<HPBar>().FromInstance(hud.GetComponentInChildren<HPBar>()).AsSingle();
 
             _hud = hud.GetComponent<HUD>();
             _endGameState.InitHud(_hud);
-            _diContainer.Bind<HPBar>().FromInstance(hud.GetComponentInChildren<HPBar>()).AsSingle();
         }
 
         public HeroHealth CreateHero()
         {
             GameObject hero = Instantiate(AssetPath.HeroPath, _gameData.HeroSpawnPoint);
 
+            var health = hero.GetComponent<HeroHealth>();
+            _diContainer.Bind<IVampire>().FromInstance(health).AsSingle();
+
             _spawnController.InitHero(hero.transform);
-            return hero.GetComponent<HeroHealth>();
+
+            return health;
         }
 
         public void CreateEndGame() =>

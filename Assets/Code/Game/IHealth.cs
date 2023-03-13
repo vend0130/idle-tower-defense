@@ -6,6 +6,6 @@ namespace Code.Game
     {
         UnitType Unit { get; }
         Transform Current { get; }
-        void TakeDamage(float damage);
+        void TakeDamage(float damage, bool bloodlust = false);
     }
 }

@@ -25,7 +25,7 @@ namespace Code.Game.Arrow
         {
             if (col.TryGetComponent(out IHealth health) && _attacker.transform != health.Current)
             {
-                health.TakeDamage(_damage);
+                health.TakeDamage(_damage, bloodlust: true);
                 UnSpawn();
             }
         }

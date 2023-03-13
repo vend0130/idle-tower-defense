@@ -6,30 +6,32 @@ using Zenject;
 
 namespace Code.Game.Hero
 {
-    public class HeroHealth : MonoBehaviour, IHealth
+    public class HeroHealth : MonoBehaviour, IHealth, IVampire
     {
         [field: SerializeField] public UnitType Unit { get; private set; }
         [field: SerializeField] public Transform Current { get; private set; }
 
         [SerializeField] private TakeDamageVisualization _takeDamage;
+        [SerializeField] private float _maxHp;
+        [SerializeField] private float _currentHp;
 
         public event Action DieHandler;
 
-        private float _maxHp;
         private HPBar _hpBar;
-        private float _currentHp;
+        private BloodlustData _bloodlustData;
 
         [Inject]
-        public void Constructor(HPBar hpBar, GameData _gameData)
+        public void Constructor(HPBar hpBar, GameData gameData, BloodlustData bloodlustData)
         {
             _hpBar = hpBar;
-            _maxHp = _gameData.HeroDefaultHp;
+            _bloodlustData = bloodlustData;
+            _maxHp = gameData.HeroDefaultHp;
 
-            _currentHp = _maxHp;
+            _currentHp = _maxHp / 2;
             ChangeHPBar();
         }
 
-        public void TakeDamage(float damage)
+        public void TakeDamage(float damage, bool bloodlust = false)
         {
             if (_currentHp == 0)
                 return;
@@ -37,13 +39,19 @@ namespace Code.Game.Hero
             _currentHp = _currentHp - damage < 0 ? 0 : _currentHp - damage;
 
             _takeDamage.Visualization();
-            ChangeHPBar();
 
             if (_currentHp <= 0)
             {
                 DieHandler?.Invoke();
                 Destroy(gameObject);
             }
+        }
+
+        public void Vampirism(float maxHp)
+        {
+            _currentHp += maxHp * ((float)_bloodlustData.Vampirism / 100);
+            _currentHp = _currentHp > _maxHp ? _maxHp : _currentHp;
+            ChangeHPBar();
         }
 
         private void ChangeHPBar() =>

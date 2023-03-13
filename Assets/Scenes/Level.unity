@@ -8009,6 +8009,7 @@ MonoBehaviour:
   _controlOverEnemyData: {fileID: 11400000, guid: 76e58b78ba03fd04bbc91cc1b3d4c710, type: 2}
   _lightningData: {fileID: 11400000, guid: 4fcf1f6daed52a54caec5b9a13b9df66, type: 2}
   _lightningView: {fileID: 2119606662}
+  _bloodlustData: {fileID: 11400000, guid: 22fefdf1c5c633546be87deaf1bbbb74, type: 2}
 --- !u!114 &1530285303
 MonoBehaviour:
   m_ObjectHideFlags: 0

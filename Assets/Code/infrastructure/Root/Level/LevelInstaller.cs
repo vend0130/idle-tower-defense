@@ -20,6 +20,7 @@ namespace Code.infrastructure.Root.Level
         [Space, SerializeField] private ControlOverEnemyData _controlOverEnemyData;
         [Space, SerializeField] private LightningData _lightningData;
         [SerializeField] private LightningView _lightningView;
+        [SerializeField, Space] private BloodlustData _bloodlustData;
 
         public override void InstallBindings()
         {
@@ -36,6 +37,7 @@ namespace Code.infrastructure.Root.Level
             Container.Bind<Camera>().FromInstance(_camera).AsSingle();
             Container.Bind<MeteoriteView>().FromInstance(_meteoriteView).AsSingle();
             Container.Bind<LightningView>().FromInstance(_lightningView).AsSingle();
+            Container.Bind<BloodlustData>().FromInstance(_bloodlustData).AsSingle();
         }
 
         private void BindFactories()

@@ -1,4 +1,6 @@
-﻿using Code.Factories.Enemies;
+﻿using Code.Data;
+using Code.Factories.Enemies;
+using Code.Game.Hero;
 using Code.Game.UI;
 using UnityEngine;
 using Zenject;
@@ -16,10 +18,16 @@ namespace Code.Game.Enemy
         [SerializeField] private float _currentHp;
 
         private IEnemiesPool _pool;
+        private BloodlustData _bloodlustData;
+        private IVampire _vampire;
 
         [Inject]
-        public void Constructor(IEnemiesPool pool) =>
+        public void Constructor(IEnemiesPool pool, IVampire vampire, BloodlustData bloodlustData)
+        {
             _pool = pool;
+            _vampire = vampire;
+            _bloodlustData = bloodlustData;
+        }
 
         public void Reset()
         {
@@ -31,10 +39,16 @@ namespace Code.Game.Enemy
         public void ChangeTypeUnit(UnitType unit) =>
             Unit = unit;
 
-        public void TakeDamage(float damage)
+        public void TakeDamage(float damage, bool bloodlust = false)
         {
             if (_currentHp <= 0)
                 return;
+
+            if (bloodlust)
+            {
+                _vampire.Vampirism(_maxHp);
+                damage += _maxHp * ((float)_bloodlustData.AdditionalDamage / 100);
+            }
 
             _currentHp = _currentHp - damage < 0 ? 0 : _currentHp - damage;
 
