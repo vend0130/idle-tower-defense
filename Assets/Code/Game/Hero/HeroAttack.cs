@@ -21,12 +21,13 @@ namespace Code.Game.Hero
             _gameData = gameData;
         }
 
-        public void Attack(Transform body)
+        public void Attack(Transform healthTransform, Transform body)
         {
             if (_nextTimeAttack > Time.time)
                 return;
 
-            _arrowFactory.Spawn(_spawnPoint.position, body.rotation, _gameData.ArrowSpeed);
+            _arrowFactory.Spawn(healthTransform, _gameData.HeroDamage, _spawnPoint.position, body.rotation,
+                _gameData.ArrowSpeed);
             _nextTimeAttack = Time.time + _cooldown;
         }
     }

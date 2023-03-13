@@ -144,9 +144,61 @@ PrefabInstance:
       propertyPath: _cooldown
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -2158528669614944435, guid: 40b65c55404eecd4790e94f221053f70, type: 3}
+      propertyPath: _colorings.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2158528669614944435, guid: 40b65c55404eecd4790e94f221053f70, type: 3}
+      propertyPath: _colorings.Array.data[0].Sprite
+      value: 
+      objectReference: {fileID: 3923624072258683274}
+    - target: {fileID: -2158528669614944435, guid: 40b65c55404eecd4790e94f221053f70, type: 3}
+      propertyPath: _colorings.Array.data[0].TargetColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2158528669614944435, guid: 40b65c55404eecd4790e94f221053f70, type: 3}
+      propertyPath: _colorings.Array.data[0].TargetColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2158528669614944435, guid: 40b65c55404eecd4790e94f221053f70, type: 3}
+      propertyPath: _colorings.Array.data[0].TargetColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2158528669614944435, guid: 40b65c55404eecd4790e94f221053f70, type: 3}
+      propertyPath: _colorings.Array.data[0].TargetColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2158528669614944435, guid: 40b65c55404eecd4790e94f221053f70, type: 3}
+      propertyPath: _colorings.Array.data[0].DefaultColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2158528669614944435, guid: 40b65c55404eecd4790e94f221053f70, type: 3}
+      propertyPath: _colorings.Array.data[0].DefaultColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2158528669614944435, guid: 40b65c55404eecd4790e94f221053f70, type: 3}
+      propertyPath: _colorings.Array.data[0].DefaultColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2158528669614944435, guid: 40b65c55404eecd4790e94f221053f70, type: 3}
+      propertyPath: _colorings.Array.data[0].DefaultColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2261632231247670150, guid: 40b65c55404eecd4790e94f221053f70, type: 3}
       propertyPath: m_Name
       value: SimplyEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3649071854702732368, guid: 40b65c55404eecd4790e94f221053f70, type: 3}
+      propertyPath: _maxHp
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4010836492009579166, guid: 40b65c55404eecd4790e94f221053f70, type: 3}
+      propertyPath: m_Size.y
+      value: 0.52165055
+      objectReference: {fileID: 0}
+    - target: {fileID: 4010836492009579166, guid: 40b65c55404eecd4790e94f221053f70, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.036579676
       objectReference: {fileID: 0}
     - target: {fileID: 8484085580101477092, guid: 40b65c55404eecd4790e94f221053f70, type: 3}
       propertyPath: m_RootOrder

@@ -10,6 +10,7 @@ namespace Code.Game.Hero
         [SerializeField] private Transform _body;
         [SerializeField] private HeroRotation _rotation;
         [SerializeField] private HeroAttack _attack;
+        [SerializeField] private HeroHealth _health;
 
         private Transform _target;
         private IEnemiesPool _enemiesFactory;
@@ -31,7 +32,7 @@ namespace Code.Game.Hero
                 return;
 
             _rotation.Rotation(_body, _target);
-            _attack.Attack(_body);
+            _attack.Attack(_health.Current, _body);
         }
     }
 }

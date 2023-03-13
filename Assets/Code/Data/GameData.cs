@@ -20,6 +20,7 @@ namespace Code.Data
         [field: SerializeField] public int MinimalDistanceForAttack { get; private set; } = 4;
         [field: SerializeField] public Vector2 HeroSpawnPoint { get; private set; } = Vector2.zero;
         [field: SerializeField] public float ArrowSpeed { get; private set; } = 18;
+        [field: SerializeField] public float HeroDamage { get; private set; } = 5;
 
         public int SpawnTimeSimplyEnemy => (int)(_spawnTimeSimplyEnemy * 1000);
         public float SpawnTimeBossEnemy => _spawnTimeBossEnemy;

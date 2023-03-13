@@ -73,6 +73,7 @@ GameObject:
   - component: {fileID: -364460634881872655}
   - component: {fileID: -3132029701033033564}
   - component: {fileID: 5348609657004748145}
+  - component: {fileID: 5071056154168642427}
   m_Layer: 0
   m_Name: HeroBase
   m_TagString: Untagged
@@ -111,6 +112,7 @@ MonoBehaviour:
   _body: {fileID: 4640196950578839487}
   _rotation: {fileID: -364460634881872655}
   _attack: {fileID: 5348609657004748145}
+  _health: {fileID: -3132029701033033564}
 --- !u!114 &-364460634881872655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,8 +137,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5326873ebde45b794b152bda082c4e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _colorings: []
-  _duration: 0.1
+  <Current>k__BackingField: {fileID: 4640196951702182896}
+  _takeDamage: {fileID: 5071056154168642427}
 --- !u!114 &5348609657004748145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,4 +152,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnPoint: {fileID: 7099148901350552607}
-  _cooldown: 1
+  _cooldown: 0.5
+--- !u!114 &5071056154168642427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4640196951702182863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aac8d8eedaa0481e840fb4d7c465f54e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _colorings:
+  - DefaultColor: {r: 1, g: 1, b: 1, a: 1}
+    TargetColor: {r: 1, g: 0, b: 0, a: 1}
+    Sprite: {fileID: 0}
+  - DefaultColor: {r: 0, g: 0, b: 0, a: 0}
+    TargetColor: {r: 0, g: 0, b: 0, a: 0}
+    Sprite: {fileID: 0}
+  _duration: 0.1

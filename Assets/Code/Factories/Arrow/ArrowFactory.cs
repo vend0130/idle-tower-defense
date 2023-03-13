@@ -20,7 +20,7 @@ namespace Code.Factories.Arrow
         public void Initialize() =>
             _arrowPrefab = _assetsProvider.Warmup(AssetPath.ArrowPath);
 
-        public void Spawn(Vector2 point, Quaternion rotation, float speed)
+        public void Spawn(Transform attacker, float damage, Vector2 point, Quaternion rotation, float speed)
         {
             ArrowView arrow;
 
@@ -35,7 +35,7 @@ namespace Code.Factories.Arrow
             }
 
             SetTransform(arrow, point, rotation);
-            arrow.Activate(speed);
+            arrow.Activate(attacker, damage, speed);
         }
 
         public void UnSpawn(ArrowView arrow) =>

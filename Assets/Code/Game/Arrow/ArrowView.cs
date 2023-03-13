@@ -11,28 +11,41 @@ namespace Code.Game.Arrow
         [SerializeField] private float _speed;
 
         private const int TimeMove = 3000;
-        
-        private readonly CancellationTokenSource _cancellationToken = new CancellationTokenSource();
-        
-        private IArrowPoolable _pool;
 
-        private void Update() => 
-            _current.Translate(Vector2.up * _speed  * Time.deltaTime);
+        private readonly CancellationTokenSource _cancellationToken = new CancellationTokenSource();
+
+        private IArrowPoolable _pool;
+        private Transform _attacker;
+        private float _damage;
+
+        private void Update() =>
+            _current.Translate(Vector2.up * _speed * Time.deltaTime);
+
+        private void OnTriggerEnter2D(Collider2D col)
+        {
+            if (col.TryGetComponent(out IHealth health) && _attacker.transform != health.Current)
+            {
+                health.TakeDamage(_damage);
+                UnSpawn();
+            }
+        }
 
         private void OnDestroy()
         {
-            if(_cancellationToken == null)
+            if (_cancellationToken == null)
                 return;
-            
+
             _cancellationToken.Cancel();
             _cancellationToken.Dispose();
         }
 
-        public void InitPool(IArrowPoolable pool) => 
+        public void InitPool(IArrowPoolable pool) =>
             _pool = pool;
 
-        public void Activate(float speed)
+        public void Activate(Transform attacker, float damege, float speed)
         {
+            _attacker = attacker;
+            _damage = damege;
             _speed = speed;
             gameObject.SetActive(true);
             MoveDelay().Forget();
@@ -46,9 +59,9 @@ namespace Code.Game.Arrow
 
         private void UnSpawn()
         {
-            if(!gameObject.activeSelf)
+            if (!gameObject.activeSelf)
                 return;
-            
+
             gameObject.SetActive(false);
             _pool.UnSpawn(this);
         }

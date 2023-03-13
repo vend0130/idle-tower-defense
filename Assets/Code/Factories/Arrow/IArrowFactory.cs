@@ -4,6 +4,6 @@ namespace Code.Factories.Arrow
 {
     public interface IArrowFactory
     {
-        void Spawn(Vector2 point, Quaternion rotation, float speed);
+        void Spawn(Transform attacker, float damage, Vector2 point, Quaternion rotation, float speed);
     }
 }
