@@ -16,8 +16,8 @@ namespace Code.infrastructure.Root.Level
         private readonly ISpawnModel _spawnModel;
 
         public LevelInitialize(IGameFactory gameFactory, LoadLevelState loadLevelState,
-            GameLoopState gameLoopState, EndGameState endGameState,
-            ISpawnController spawnController, ISpawnModel spawnModel)
+            GameLoopState gameLoopState, EndGameState endGameState, ISpawnController spawnController, 
+            ISpawnModel spawnModel)
         {
             _gameFactory = gameFactory;
             _loadLevelState = loadLevelState;

@@ -10,9 +10,11 @@ namespace Code.Factories.AssetsManagement
         public AssetsProvider(DiContainer diContainer) =>
             _diContainer = diContainer;
 
-        public GameObject DiInstantiate(string path, Vector2 at)
+        public GameObject Warmup(string path) => 
+            Resources.Load(path) as GameObject;
+
+        public GameObject DiInstantiate(GameObject prefab, Vector2 at)
         {
-            var prefab = Resources.Load(path) as GameObject;
             return _diContainer.InstantiatePrefab(prefab, at, Quaternion.identity, null);
         }
 
