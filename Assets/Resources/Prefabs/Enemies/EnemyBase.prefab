@@ -136,6 +136,7 @@ MonoBehaviour:
   <EnemyTransform>k__BackingField: {fileID: 8484085580101477092}
   <EnemyType>k__BackingField: 0
   <ControlledView>k__BackingField: {fileID: 8895373387624947037}
+  <Health>k__BackingField: {fileID: 3649071854702732368}
   _move: {fileID: -8905804857038030544}
   _attack: {fileID: -4886712249820533609}
   _health: {fileID: 3649071854702732368}
@@ -244,6 +245,7 @@ MonoBehaviour:
   _attack: {fileID: -4886712249820533609}
   _health: {fileID: 3649071854702732368}
   _sprite: {fileID: 6219014508323607848}
+  <IsControlled>k__BackingField: 0
 --- !u!1 &7307327324100549388
 GameObject:
   m_ObjectHideFlags: 0

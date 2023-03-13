@@ -10,5 +10,6 @@ namespace Code.Factories.Enemies
         void UnSpawn(EnemyView enemyView);
         void AddControlEnemy();
         void RemoveControlEnemy();
+        List<EnemyView> GetEnemiesInRadius(Vector2 origin, float radius, int count);
     }
 }

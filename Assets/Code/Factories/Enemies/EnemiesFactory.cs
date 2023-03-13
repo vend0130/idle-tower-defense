@@ -70,7 +70,7 @@ namespace Code.Factories.Enemies
 
             target = _enemiesOnScene[0].EnemyTransform;
             float currentDistance = Vector2.Distance(origin, target.position);
-            for (int i = 0; i < _enemiesOnScene.Count; i++)
+            for (int i = 1; i < _enemiesOnScene.Count; i++)
             {
                 float newDistance = Vector2.Distance(origin, _enemiesOnScene[i].EnemyTransform.position);
                 if (newDistance < currentDistance)
@@ -87,6 +87,23 @@ namespace Code.Factories.Enemies
             }
 
             return true;
+        }
+
+        public List<EnemyView> GetEnemiesInRadius(Vector2 origin, float radius, int count)
+        {
+            List<EnemyView> enemyViews = new List<EnemyView>();
+            for (int i = 0; i < _enemiesOnScene.Count; i++)
+            {
+                float distance = Vector2.Distance(origin, _enemiesOnScene[i].EnemyTransform.position);
+
+                if (distance < radius / 2)
+                    enemyViews.Add(_enemiesOnScene[i]);
+
+                if (enemyViews.Count == count)
+                    return enemyViews;
+            }
+
+            return enemyViews;
         }
 
         public void Spawn(EnemyType enemyType, Vector2 at, Transform heroTransform)

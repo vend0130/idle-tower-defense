@@ -15,9 +15,11 @@ namespace Code.infrastructure.Root.Level
     public class LevelInstaller : MonoInstaller
     {
         [SerializeField] private Camera _camera;
-        [SerializeField] private MeteoriteView _meteoriteView;
+        [Space, SerializeField] private MeteoriteView _meteoriteView;
         [SerializeField] private MeteoriteData _meteoriteData;
-        [SerializeField] private ControlOverEnemyData _controlOverEnemyData;
+        [Space, SerializeField] private ControlOverEnemyData _controlOverEnemyData;
+        [Space, SerializeField] private LightningData _lightningData;
+        [SerializeField] private LightningView _lightningView;
 
         public override void InstallBindings()
         {
@@ -33,6 +35,7 @@ namespace Code.infrastructure.Root.Level
         {
             Container.Bind<Camera>().FromInstance(_camera).AsSingle();
             Container.Bind<MeteoriteView>().FromInstance(_meteoriteView).AsSingle();
+            Container.Bind<LightningView>().FromInstance(_lightningView).AsSingle();
         }
 
         private void BindFactories()
@@ -56,6 +59,9 @@ namespace Code.infrastructure.Root.Level
 
             Container.BindInterfacesTo<ControlOverEnemyController>().AsSingle();
             Container.Bind<ControlOverEnemyData>().FromInstance(_controlOverEnemyData).AsSingle();
+
+            Container.BindInterfacesTo<LightningController>().AsSingle();
+            Container.Bind<LightningData>().FromInstance(_lightningData).AsSingle();
         }
     }
 }

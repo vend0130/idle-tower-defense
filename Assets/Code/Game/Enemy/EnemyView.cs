@@ -9,6 +9,7 @@ namespace Code.Game.Enemy
         [field: SerializeField] public Transform EnemyTransform { get; private set; }
         [field: SerializeField] public EnemyType EnemyType { get; private set; }
         [field: SerializeField] public ControlledView ControlledView { get; private set; }
+        [field: SerializeField] public EnemyHealth Health { get; private set; }
         [SerializeField] private EnemyMove _move;
         [SerializeField] private EnemyAttack _attack;
         [SerializeField] private EnemyHealth _health;

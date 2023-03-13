@@ -15,6 +15,7 @@ namespace Code.infrastructure.StateMachine.States
         private HeroHealth _heroHealth;
         private IMeteoriteController _meteoriteController;
         private IControlOverEnemy _controlOverEnemy;
+        private ILightningController _lightningController;
 
         public LoadLevelState(ILoadScene loadScene) =>
             _loadScene = loadScene;
@@ -23,11 +24,12 @@ namespace Code.infrastructure.StateMachine.States
             _stateMachine = stateMachine;
 
         public void InitLevelData(IGameFactory gameFactory, IMeteoriteController meteoriteController,
-            IControlOverEnemy controlOverEnemy)
+            IControlOverEnemy controlOverEnemy, ILightningController lightningController)
         {
             _meteoriteController = meteoriteController;
             _gameFactory = gameFactory;
             _controlOverEnemy = controlOverEnemy;
+            _lightningController = lightningController;
         }
 
         public async void Enter(string sceneName)
@@ -51,6 +53,7 @@ namespace Code.infrastructure.StateMachine.States
             _heroHealth = _gameFactory.CreateHero();
             _meteoriteController.InitSpellView(_gameFactory.CreateSpell(SpellType.Meteorite));
             _controlOverEnemy.InitSpellView(_gameFactory.CreateSpell(SpellType.ControlOverEnemy));
+            _lightningController.InitSpellView(_gameFactory.CreateSpell(SpellType.Lightning));
             await UniTask.Yield();
         }
     }

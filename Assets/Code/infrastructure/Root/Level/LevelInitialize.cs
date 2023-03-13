@@ -17,10 +17,12 @@ namespace Code.infrastructure.Root.Level
         private readonly ISpawnModel _spawnModel;
         private readonly IMeteoriteController _meteoriteController;
         private readonly IControlOverEnemy _controlOverEnemy;
+        private readonly ILightningController _lightningController;
 
         public LevelInitialize(IGameFactory gameFactory, LoadLevelState loadLevelState,
             GameLoopState gameLoopState, EndGameState endGameState, ISpawnController spawnController,
-            ISpawnModel spawnModel, IMeteoriteController meteoriteController, IControlOverEnemy controlOverEnemy)
+            ISpawnModel spawnModel, IMeteoriteController meteoriteController, IControlOverEnemy controlOverEnemy,
+            ILightningController lightningController)
         {
             _gameFactory = gameFactory;
             _loadLevelState = loadLevelState;
@@ -30,6 +32,7 @@ namespace Code.infrastructure.Root.Level
             _spawnModel = spawnModel;
             _meteoriteController = meteoriteController;
             _controlOverEnemy = controlOverEnemy;
+            _lightningController = lightningController;
         }
 
         public void Initialize()
@@ -37,7 +40,7 @@ namespace Code.infrastructure.Root.Level
             _spawnModel.Init();
             _endGameState.InitGameFactory(_gameFactory);
             _gameLoopState.InitSpawnController(_spawnController);
-            _loadLevelState.InitLevelData(_gameFactory, _meteoriteController, _controlOverEnemy);
+            _loadLevelState.InitLevelData(_gameFactory, _meteoriteController, _controlOverEnemy, _lightningController);
         }
     }
 }

@@ -20,12 +20,14 @@ namespace Code.Factories
         private readonly GameData _gameData;
         private readonly MeteoriteData _meteoriteData;
         private readonly ControlOverEnemyData _controlOverEnemyData;
+        private readonly LightningData _lightningData;
 
         private HUD _hud;
 
         public GameFactory(IAssetsProvider assetsProvider, DiContainer diContainer,
             ISpawnController spawnController, EndGameState endGameState, GameData gameData,
-            MeteoriteData meteoriteData, ControlOverEnemyData controlOverEnemyData)
+            MeteoriteData meteoriteData, ControlOverEnemyData controlOverEnemyData,
+            LightningData lightningData)
         {
             _assetsProvider = assetsProvider;
             _diContainer = diContainer;
@@ -34,6 +36,7 @@ namespace Code.Factories
             _gameData = gameData;
             _meteoriteData = meteoriteData;
             _controlOverEnemyData = controlOverEnemyData;
+            _lightningData = lightningData;
         }
 
         public void CreateHud()
@@ -71,6 +74,9 @@ namespace Code.Factories
                     break;
                 case SpellType.ControlOverEnemy:
                     spellView.SetData(_controlOverEnemyData.Cooldown, _controlOverEnemyData.Text);
+                    break;
+                case SpellType.Lightning:
+                    spellView.SetData(_lightningData.Cooldown, _lightningData.Text);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(spellType), spellType, null);
